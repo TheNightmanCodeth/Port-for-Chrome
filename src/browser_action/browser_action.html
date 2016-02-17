@@ -1,11 +1,14 @@
 <!doctype html>
+<html>
+<head>
 
-
+</head>
 <style type="text/css">
 	#mainPopup {
-		padding: 10px;
+		padding: 0px;
 		height: 200px;
-		width: 400px;
+		width: 150px;
+		background-color: rgb(55,171,200);
 		font-family: Helvetica, Ubuntu, Arial, sans-serif;
 	}
 	h1 {
@@ -13,10 +16,11 @@
 	}
 </style>
 
+<body style="background-color:#37ABC8">
 <div id="mainPopup">
-<h1>Port Login</h1>
+<center> <img src="logo_login.png" align="middle" alt="Port_Login.png">
+<h1>Login</h1></center>
 Email: <input type="text" id="email_input" name="email"><br>
-Username: <input type="text" id="user_input" name="user"><br>
 Password: <input type="text" id="passw_input" name="password"><br>
 <button id="submit_button">submit</button>
 <br>
@@ -25,3 +29,5 @@ Password: <input type="text" id="passw_input" name="password"><br>
 
 <script type="text/javascript" src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
 <script src="browser_action.js"></script>
+</body>
+</html>

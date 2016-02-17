@@ -3,26 +3,12 @@ var f = new Firebase('https://porthole.firebaseio.com/');
 var username = "";
 
 function register() {
-
   //Get the input from user
   var emailVal = document.getElementById("email_input").value;
-  var usernVal = document.getElementById("user_input").value;
   var passwVal = document.getElementById("passw_input").value;
 
-  //Create user
-  f.createUser({
-    email    : emailVal,
-    password : passwVal
-  }, function(error, userData) {
-      if (error) {
-        console.log("Error creating user: " +error);
-      } else {
-        console.log("Successfully created user account with uid: " +userData.uid);
-        username = usernVal;
-        login(emailVal, passwVal, usernVal);
-      }
-  });
-
+  //Login user
+  login(emailVal, passwVal);
 }
 
 function writeLink(usern, link) {
@@ -34,8 +20,7 @@ function writeLink(usern, link) {
   });
 }
 
-function login(email, pass, usern) {
-  console.log("test");
+function login(email, pass) {
   f.authWithPassword({
     email    : email,
     password : pass
@@ -47,7 +32,10 @@ function login(email, pass, usern) {
         var url = null;
         chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function(tabs) {
           url = tabs[0].url;
-          writeLink(usern, url);
+          var uid = authData.uid;
+          //TODO: Get username from firebase
+          console.log("UDI: " +uid);
+          writeLink(username, url);
         });
       }
   }, {
