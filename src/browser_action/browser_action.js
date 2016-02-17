@@ -28,6 +28,7 @@ function register() {
 function writeLink(usern, link) {
   console.log("writing link to firebase");
   var portRef = f.child("ports");
+
   portRef.child(usern).update({
     link: link
   });
@@ -43,7 +44,11 @@ function login(email, pass, usern) {
         console.log("Login failed: " +error);
       } else {
         console.log("Logged in: " +authData);
-        writeLink(usern, "https://www.reddit.com/r/trees/");
+        var url = null;
+        chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function(tabs) {
+          url = tabs[0].url;
+          writeLink(usern, url);
+        });
       }
   }, {
     remember: "sessionOnly"
