@@ -2,20 +2,11 @@ Firebase.enableLogging(true);
 var f = new Firebase('https://porthole.firebaseio.com/');
 var username = "";
 
-function register() {
-  //Get the input from user
-  var emailVal = document.getElementById("email_input").value;
-  var passwVal = document.getElementById("passw_input").value;
-
-  //Login user
-  login(emailVal, passwVal);
-}
-
-function writeLink(usern, link) {
+function writeLink(uid, link) {
   console.log("writing link to firebase");
   var portRef = f.child("ports");
 
-  portRef.child(usern).update({
+  portRef.child(uid).update({
     link: link
   });
 }
@@ -33,9 +24,8 @@ function login(email, pass) {
         chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function(tabs) {
           url = tabs[0].url;
           var uid = authData.uid;
-          //TODO: Get username from firebase
           console.log("UDI: " +uid);
-          writeLink(username, url);
+          writeLink(uid, url);
         });
       }
   }, {
@@ -44,5 +34,10 @@ function login(email, pass) {
 }
 
 document.getElementById("submit_button").addEventListener("click", function() {
-  register();
+  //Get the input from user
+  var emailVal = document.getElementById("email_input").value;
+  var passwVal = document.getElementById("passw_input").value;
+
+  //Login user
+  login(emailVal, passwVal);
 });
