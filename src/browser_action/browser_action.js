@@ -26,6 +26,7 @@ function login(email, pass) {
           var uid = authData.uid;
           console.log("UDI: " +uid);
           writeLink(uid, url);
+          window.open('port.html', '_self', false);
         });
       }
   }, {
